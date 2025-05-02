@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二个界面</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* 定义进入动画 */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px); /* 从上方滑入 */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* 回到原始位置 */
+            }
+        }
+
+        /* 应用动画到容器 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out; /* 添加动画 */
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #3498db;
+            animation: fadeIn 1.5s ease-in-out; /* 标题单独动画 */
+            position: relative; /* 设置相对定位 */
+            top: -35%; /* 向上移动 50px */
+            text-align: center; /* 保持水平居中 */
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in-out; /* 段落单独动画 */
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            animation: fadeIn 2.5s ease-in-out; /* 按钮单独动画 */
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+         /* 按钮1的位置 */
+         .transparent-borderless-button:nth-child(1) {
+            top: 40%; /* 距离顶部 40% */
+            left: 50%; /* 距离左侧 50% */
+            transform: translate(-50%, -50%);
+        }
+
+        /* 按钮2的位置 */
+        .transparent-borderless-button:nth-child(2) {
+            top: 45%; /* 距离顶部 45% */
+            left: 50%; /* 距离左侧 50% */
+            transform: translate(-50%, -50%);
+        }
+
+        .borderless-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            color: #3498db; /* 按钮文字颜色 */
+            background-color: transparent; /* 背景透明 */
+            border: none; /* 无边框 */
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+            text-align: center;
+            text-decoration: none; /* 去掉下划线 */
+            transition: color 0.3s ease, transform 0.2s ease; /* 添加过渡效果 */
+        }
+
+        .borderless-button:hover {
+            color: #2980b9; /* 悬停时文字变为深蓝色 */
+            transform: scale(1.1); /* 悬停时放大按钮 */
+        }
+
+        .borderless-button:active {
+            color: #1c598a; /* 点击时文字变为更深的蓝色 */
+            transform: scale(0.95); /* 点击时缩小按钮 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>欢迎来到第二个界面</h1>
+        <p>这是一个简单的第二个界面示例。</p>
+        <a href="2.html" class="borderless-button">返回第一个界面</a>
+        <a href="4.html" class="borderless-button">进入第三个界面</a>
+    </div>
+</body>
+</html>

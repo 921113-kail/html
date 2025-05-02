@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First HTML Page</title> 
+    <style>
+        body {
+            margin: 0; /* 去掉默认边距 */
+            overflow: hidden; /* 防止滚动条在动画期间出现 */
+        }
+        video {
+            position: fixed; /* 视频固定位置 */
+            right: 0;     /* 视频固定在右下角 */
+            bottom: 0;      /* 视频固定在右下角 */
+            min-width: 100%; /* 确保视频覆盖整个屏幕 */
+            min-height: 100%; /* 确保视频覆盖整个屏幕 */ 
+            width: 100%; /* 确保视频覆盖整个屏幕 */
+            height: 100%; /* 确保视频覆盖整个屏幕 */
+            object-fit: cover; /* 确保视频始终覆盖整个背景 */
+            z-index: -1; /* 确保视频在背景中 */
+            -webkit-filter: grayscale(20%); /* 设置视频为灰度 */
+            filter: grayscale(20%); /* 设置视频为灰度 */
+        }
+        .intro {
+            position: fixed; /* 固定位置 */
+            top: 0; /* 从左上角开始 */
+            left: 0; /* 从左上角开始 */
+            width: 100%; /* 占满整个屏幕 */
+            height: 100%; /* 占满整个屏幕 */
+            background-color: lightblue; /* 背景颜色 */
+            display: flex;      /* 使用flex布局 */
+            flex-direction: column; /* 垂直排列元素 */
+            justify-content: center; /* 垂直居中 */
+            align-items: center;  /* 垂直和水平居中 */
+            z-index: 10;                 /* 确保开场动画在视频上方 */
+            animation: fadeOut 2s ease-in-out 3s forwards; /* 动画持续 2 秒，延迟 3 秒后开始 */
+            will-change: opacity, visibility;     /* 提高性能 */
+        }
+        .intro h1 {
+            font-family: 'Courier New', Courier, monospace; /* 更改字体 */
+            font-size: 3em;       /* 字体大小 */
+            color: rgb(81, 193, 212); /* 字体颜色 */
+            text-align: center; /* 水平居中 */
+            line-height: 1.5; /* 调整行高 */
+            margin: 20px 0; /* 调整上下外边距 */
+        }
+        .intro img {
+            width: 100px;    /* 图片大小 */
+            height: 100px;       /* 图片大小 */
+            border-radius: 50%;       /* 圆形图片 */
+            margin-top: 20px;          /* 上外边距 */
+        }
+        .loader {
+            border: 5px solid #f3f3f3;            /* 边框颜色 */
+            border-top: 5px solid #3498db;      /* 顶部颜色 */
+            border-radius: 50%;          /* 圆形加载器 */
+            width: 50px;            /* 圆形加载器 */
+            height: 50px;       /* 圆形加载器 */
+            animation: spin 1s linear infinite; /* 无限旋转动画 */
+            margin-top: 20px; /* 上外边距 */
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg); /* 初始旋转角度 */
+            }
+            to {
+                transform: rotate(360deg); /* 旋转360度 */
+            }
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;                 /* 透明度变为0 */
+                visibility: hidden;     /* 隐藏元素 */
+            }   
+        }
+        .content {
+            display: none;  /* 初始隐藏主内容 */
+            animation: fadeIn 1s ease-in-out forwards; /* 动画持续 1 秒 */
+            will-change: opacity;  /* 提高性能 */
+            text-align: center; /* 水平居中内容 */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;             /* 初始透明度为0 */
+            }
+            to {
+                opacity: 1;             /* 完全不透明 */
+            }
+        }
+        .content h1 {
+            display: inline-block;
+            font-size: 3em;
+            font-family: 'KaiTi', sans-serif;
+            color: #3498db;
+            text-align: center;
+            position: relative;
+            top: 250px;
+        }
+
+        /* 每个字母的动画 */
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: moveLetter 1s ease-in-out forwards;
+        }
+
+        /* 定义沿X轴运动的动画 */
+        @keyframes moveLetter {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @media (max-width: 768px) { /* 小屏幕设备 */
+            .intro h1 {
+                font-size: 2em;      /* 小屏幕字体大小 */
+            }
+            .loader {
+                width: 30px;           /* 小屏幕加载器大小 */
+                height: 30px;     /* 小屏幕加载器大小 */
+            } 
+        }
+        .button {     /* 按钮样式 */
+            display: inline-block;     /* 使按钮成为块级元素 */
+            padding: 10px 20px;     /* 按钮内边距 */
+            font-size: 0.9em;     /* 按钮字体大小 */
+            font-family: 'SimHei', sans-serif;     /* 更改字体 */
+            color: white;     /* 按钮文字颜色 */
+            background-color: #3498db;      /* 按钮背景颜色 */
+            border: none;       /* 无边框 */
+            border-radius: 5px;      /* 圆角边框 */
+            cursor: pointer;         /* 鼠标悬停时显示手型 */
+            text-align: center;       /* 水平居中按钮 */
+            text-decoration: none;           /* 去掉下划线 */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* 添加过渡效果 */
+        }
+
+        .button:hover {      /* 鼠标悬停时的样式 */
+            background-color: #ffffff; /* 悬停时改变背景颜色 */
+            transform: scale(0.9); /* 悬停时放大按钮 */
+        }
+
+        .button:active {     /* 鼠标点击时的样式 */
+            background-color: #ffffff; /* 点击时改变背景颜色 */
+            transform: scale(0.8); /* 点击时缩小按钮 */
+        }
+        .transparent-button { /* 透明按钮样式 */
+            display: inline-block; /* 使按钮成为块级元素 */
+            padding: 10px 20px; /* 按钮内边距 */
+            font-size: 1em; /* 按钮字体大小 */
+            font-family: 'SimHei', sans-serif; /* 更改字体 */
+            color: #3498db; /* 按钮文字颜色 */
+            background-color: transparent; /* 背景透明 */
+            border: 2px solid #eeeeee; /* 边框颜色 */
+            border-radius: 5px; /* 圆角边框 */
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+            text-align: center; /* 水平居中按钮 */
+            text-decoration: none; /* 去掉下划线 */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* 添加过渡效果 */
+        }
+
+        .transparent-button:hover { /* 鼠标悬停时的样式 */
+            background-color: #ffffff; /* 悬停时背景变为蓝色 */
+            color: white; /* 悬停时文字变为白色 */
+            transform: scale(1.1); /* 悬停时放大按钮 */
+        }
+
+        .transparent-button:active { /* 鼠标点击时的样式 */
+            background-color: #2980b9; /* 点击时背景变为深蓝色 */
+            color: white; /* 点击时文字变为白色 */
+            transform: scale(1); /* 点击时恢复原始大小 */
+        }
+
+        .transparent-borderless-button { /* 透明无边框按钮样式 */
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.5em;
+            font-family: 'KaiTi', sans-serif;
+            color: #1c598a;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+            position: absolute; /* 使用绝对定位 */
+        }
+
+        /* 按钮1的位置 */
+        .transparent-borderless-button:nth-child(1) {
+            top: 40%; /* 距离顶部 40% */
+            left: 50%; /* 距离左侧 50% */
+            transform: translate(-50%, -50%);
+        }
+
+        /* 按钮2的位置 */
+        .transparent-borderless-button:nth-child(2) {
+            top: 45%; /* 距离顶部 45% */
+            left: 50%; /* 距离左侧 50% */
+            transform: translate(-50%, -50%);
+        }
+
+        .transparent-borderless-button:hover {
+            color: #e375f1;
+            transform: translate(-50%,-50%) scale(1.1); /* 悬停时放大按钮 */
+        }
+
+        .transparent-borderless-button:active {
+            color: #1c598a;
+            transform: translate(-50%,-50%) scale(0.95); /* 点击时缩小按钮 */
+        }
+
+        /* 样式应用到每个字 */
+        .button-letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: moveLetter 1s ease-in-out forwards;
+        }
+
+        p {
+            font-family: 'KaiTi', sans-serif; /* 更改字体 */
+            font-size: 1.5em; /* 字体大小 */
+            color: #00365a; /* 字体颜色 */
+            text-align: center; /* 水平居中 */
+            position: relative; /* 必须设置 position 才能使用 z-index */
+            top: 15em; /* 距离顶部 */
+            z-index: 50; /* 设置 Z 轴高度 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 开场动画 -->
+    <div class="intro">  
+        <h1>正在启动中</h1> 
+        <img src="22.jpg" alt="alt" style="width: 100px; height: 100px; border-radius: 50%; margin-top: 20px;"> 
+        <div class="loader"></div>
+    </div>
+
+    <!-- 背景视频 -->
+    <video src="3.mp4" autoplay="autoplay" loop="loop" muted="muted"></video>
+
+    <!-- 主内容 -->
+    <div class="content">
+        <h1>
+            <!-- 将标题逐字分割 -->
+            <span class="letter" style="animation-delay: 0s;">欢</span>
+            <span class="letter" style="animation-delay: 0.2s;">迎</span>
+            <span class="letter" style="animation-delay: 0.4s;">来</span>
+            <span class="letter" style="animation-delay: 0.6s;">到</span>
+            <span class="letter" style="animation-delay: 0.8s;">我</span>
+            <span class="letter" style="animation-delay: 1s;">的</span>
+            <span class="letter" style="animation-delay: 1.2s;">H</span>
+            <span class="letter" style="animation-delay: 1.4s;">T</span>
+            <span class="letter" style="animation-delay: 1.6s;">M</span>
+            <span class="letter" style="animation-delay: 1.8s;">L</span>
+            <span class="letter" style="animation-delay: 2s;">页</span>
+            <span class="letter" style="animation-delay: 2.2s;">面</span>
+        </h1>
+        <p>
+            <!-- 将段落逐字分割 -->
+            <span class="letter" style="animation-delay: 0s;">制</span>
+            <span class="letter" style="animation-delay: 0.2s;">作</span>
+            <span class="letter" style="animation-delay: 0.4s;">：本</span>
+            <span class="letter" style="animation-delay: 0.6s;">人</span>
+            <span class="letter" style="animation-delay: 0.8s;">指</span>
+            <span class="letter" style="animation-delay: 1s;">导</span>
+            <span class="letter" style="animation-delay: 1.2s;">：无</span>
+            <span class="letter" style="animation-delay: 1.4s;">赞</span>
+            <span class="letter" style="animation-delay: 1.6s;">助</span>
+            <span class="letter" style="animation-delay: 1.8s;">：无</span>
+    </div>
+
+    <!-- 按钮 -->
+    <div class="container">
+        <a href="3.html" class="transparent-borderless-button">
+            <!-- 按钮1文字逐字分割 -->
+            <span class="button-letter" style="animation-delay: 0s;">进</span>
+            <span class="button-letter" style="animation-delay: 0.2s;">入</span>
+            <span class="button-letter" style="animation-delay: 0.4s;">第</span>
+            <span class="button-letter" style="animation-delay: 0.6s;">二</span>
+            <span class="button-letter" style="animation-delay: 0.8s;">面</span>
+        </a>
+        <a href="4.html" class="transparent-borderless-button">
+            <!-- 按钮2文字逐字分割 -->
+            <span class="button-letter" style="animation-delay: 0s;">进</span>
+            <span class="button-letter" style="animation-delay: 0.2s;">入</span>
+            <span class="button-letter" style="animation-delay: 0.4s;">第</span>
+            <span class="button-letter" style="animation-delay: 0.6s;">三</span>
+            <span class="button-letter" style="animation-delay: 0.8s;">面</span>
+            <span class="button-letter" style="animation-delay: 1.0s;">（源）</span>
+        </a>
+    </div>
+    <script>
+        // 等待开场动画结束后显示主内容
+        setTimeout(() => { 
+            document.querySelector('.content').style.display = 'block'; // 显示主内容
+        }, 3000); // 与动画延迟时间一致
+    </script>
+</body>
+</html>
